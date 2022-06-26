@@ -29,6 +29,6 @@ export const loginSuccessData = (data,navigate ) => (dispatch) => {
         setTimeout(() => { navigate("/"); }, 3000)
     }).catch((err) => {
         dispatch(loginError())
-      alert("Please check your email or password")
+      alert("Please check your username")
     });
 }

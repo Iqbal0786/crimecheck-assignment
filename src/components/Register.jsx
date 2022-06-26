@@ -2,9 +2,10 @@ import { Box, Button, Select, TextField, Typography } from "@mui/material";
 import React from "react";
  import { useState} from "react"
 import { loginSuccessData } from "../Redux/LogInRedux/LogAction";
-import {useNavigate } from "react-router-dom"
+import {useNavigate  ,Link} from "react-router-dom"
 import {useDispatch} from "react-redux"
-export default function Login() {
+import { RegisterHandler } from "../Redux/RegisterRedux/Register/RegisterAction";
+export default function Register() {
   const dispatch=useDispatch()
   const navigate=useNavigate()
   const [input,setInput]=useState({
@@ -30,7 +31,7 @@ const userpattern = /[a-zA-Z0-9]/;
           variant="h5"
           sx={{ fontFamily: "monospace", fontSize: "25px"  , marginBottom:"10%"}}
         >
-          Login here from your username
+         Create Account Here
         </Typography>
          <Box sx={{display:"flex",flexDirection:"column" ,width:"100%" ,alignItems:"center"}}>
          <TextField variant="outlined" label='enter username..' sx={{width:"60%" , marginBottom:"20px"}} onChange={(e)=>{
@@ -43,10 +44,13 @@ const userpattern = /[a-zA-Z0-9]/;
                
             }
             else{
-             dispatch(loginSuccessData(input ,navigate))}
+             dispatch(RegisterHandler(input ,navigate))}
           }}
           >Submit</Button>
          </Box>
+         <Link to={"/login"} style={{textDecoration:"none"}}>
+          <Typography sx={{marginTop:"10px", fontFamily:"sans-serif"}}>Click to Login</Typography>
+         </Link>
       </Box>
     </>
   );

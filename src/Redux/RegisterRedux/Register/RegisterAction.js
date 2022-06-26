@@ -15,12 +15,12 @@ export const RegisterHandler=(data,navigate)=>(dispatch)=>{
     .then((res) => {
       if (res) {
           dispatch(register_success(res.data))
-        notify();
+    
         setTimeout(()=>{navigate("/Login")},3000)
       }
     })
     .catch((error) => {
-      notify2();
+     
       dispatch(register_error())
     });         
 }
