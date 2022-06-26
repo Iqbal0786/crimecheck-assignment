@@ -11,17 +11,19 @@ export const RegisterHandler=(data,navigate)=>(dispatch)=>{
 
           dispatch(register_loading())
     axios
-    .post("localhost:1212/users/register", data)
+    .post("http://localhost:1212/users/register", data)
     .then((res) => {
       if (res) {
           dispatch(register_success(res.data))
+          alert("Registered successfully !!")
     
         setTimeout(()=>{navigate("/Login")},3000)
       }
     })
     .catch((error) => {
-     
+      console.log(error.message)
       dispatch(register_error())
+      alert("Please check your username")
     });         
 }
 
