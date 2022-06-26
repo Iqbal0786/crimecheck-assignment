@@ -22,7 +22,7 @@ export const logoutUser = () => ({ type: LOGOUT})
 export const loginSuccessData = (data,navigate ) => (dispatch) => {
 
     dispatch(loginLoding());
-    axios.post("http://localhost:1212/users/login", data).then(({ data }) => {
+    axios.post("https://crimecheck-backend.herokuapp.com/users/login", data).then(({ data }) => {
         dispatch(loginSuccess(data))
         console.log(data)
         alert("Logged in Successfully")

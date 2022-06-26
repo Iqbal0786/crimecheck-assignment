@@ -11,7 +11,7 @@ export const RegisterHandler=(data,navigate)=>(dispatch)=>{
 
           dispatch(register_loading())
     axios
-    .post("http://localhost:1212/users/register", data)
+    .post("https://crimecheck-backend.herokuapp.com/users/register", data)
     .then((res) => {
       if (res) {
           dispatch(register_success(res.data))

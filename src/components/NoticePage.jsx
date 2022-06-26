@@ -20,7 +20,7 @@ export default function NoticePage() {
       fetchRecord()
     },[])
    const fetchRecord=()=>{
-      axios.get("http://localhost:1212/noticeBoards").then((res)=>{
+      axios.get("https://crimecheck-backend.herokuapp.com/noticeBoards").then((res)=>{
         setNoticeData([...res.data])
          //console.log(res.data)
       }).catch((err)=>{
@@ -29,7 +29,7 @@ export default function NoticePage() {
    }
 
    const postData=()=>{
-      axios.post("http://localhost:1212/noticeBoards",text).then((res)=>{
+      axios.post("https://crimecheck-backend.herokuapp.com/noticeBoards",text).then((res)=>{
         alert("Notice submitted successfully !!")
         fetchRecord()
         setText({...text,noticeText:""})
