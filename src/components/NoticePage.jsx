@@ -3,8 +3,9 @@ import React, { useEffect, useState } from 'react'
 import {  Button,  TextField } from "@mui/material";
 import axios from 'axios';
 import SingleNoticeItem from './SingleNoticeItem';
- import { useSelector } from 'react-redux';
+ import { useSelector ,useDispatch} from 'react-redux';
 import Login from './Login';
+import { logoutUser } from '../Redux/LogInRedux/LogAction';
 export default function NoticePage() {
    const [noticeData,setNoticeData]=useState([]);
    const [text,setText]=useState({
@@ -12,6 +13,7 @@ export default function NoticePage() {
     user_id:""
    })
    const {user}= useSelector((store)=>store.logInData)
+   const dispatch=useDispatch();
    console.log(user._id)
 
     useEffect(()=>{
@@ -41,7 +43,12 @@ export default function NoticePage() {
   <AppBar>
  
      <Toolbar>
-         <Typography>Welcome {user.username}</Typography>
+        <Box sx={{width:"100%",display:"flex",justifyContent:"space-between"}}>
+        <Typography sx={{fontFamily:"revert" , fontSize:"19px"}}>Welcome {user.username}</Typography>
+        <Typography sx={{cursor:"pointer"}} onClick={()=>{
+              dispatch(logoutUser())
+        }}>Log Out </Typography>
+        </Box>
      </Toolbar>
   </AppBar>
     
