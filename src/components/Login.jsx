@@ -2,7 +2,7 @@ import { Box, Button, Select, TextField, Typography } from "@mui/material";
 import React from "react";
  import { useState} from "react"
 import { loginSuccessData } from "../Redux/LogInRedux/LogAction";
-import {useNavigate } from "react-router-dom"
+import {useNavigate,Link } from "react-router-dom"
 import {useDispatch} from "react-redux"
 export default function Login() {
   const dispatch=useDispatch()
@@ -47,6 +47,9 @@ const userpattern = /[a-zA-Z0-9]/;
           }}
           >Submit</Button>
          </Box>
+         <Link to={"/register"} style={{textDecoration:"none"}}>
+          <Typography sx={{marginTop:"10px", fontFamily:"sans-serif"}}>Create New Account</Typography>
+         </Link>
       </Box>
     </>
   );
