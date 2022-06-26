@@ -10,7 +10,7 @@ export default function SingleNoticeItem({text,username , date ,time}) {
 
   return (
     <div>
-      <Accordion   sx={{marginBottom:"10px"}}>
+      <Accordion   sx={{marginBottom:"30px"}}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"

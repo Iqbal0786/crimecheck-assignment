@@ -4,6 +4,7 @@ import {  Button,  TextField } from "@mui/material";
 import axios from 'axios';
 import SingleNoticeItem from './SingleNoticeItem';
  import { useSelector } from 'react-redux';
+import Login from './Login';
 export default function NoticePage() {
    const [noticeData,setNoticeData]=useState([]);
    const [text,setText]=useState({
@@ -35,84 +36,84 @@ export default function NoticePage() {
       })
    }
    console.log(text)
-  return (
-   <>
- <AppBar>
-
-    <Toolbar>
-        <Typography>Welcome {user.username}</Typography>
-    </Toolbar>
- </AppBar>
-   
-   <Box sx={{width:"100%" , marginTop:"100px" , display:"flex", justifyContent:"space-around"}}>
-   <Box
-        sx={{
-          width: "40%",
-          height: "400px",
-          margin: "auto",
-          boxShadow:
-            " rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px",
-          padding: "20px",
-          textAlign: "center",
-          backgroundColor:"InfoBackground",
-          
-          
-        }}
-      >
-        <Typography
-          variant="h5"
-          sx={{ fontFamily: "monospace", fontSize: "25px"  , marginBottom:"5%"}}
-        >
-          Write Notice in the box
-        </Typography>
-         <Box sx={{display:"flex",flexDirection:"column" ,width:"100%" ,alignItems:"center"}}>
-         <TextareaAutosize
-      aria-label="maximum height"
-      placeholder="write notice text here within 100 characters ..."
-      onChange={(e)=>{
-         setText({...text,noticeText:e.target.value , user_id:user._id})
-      }}
-      maxLength={100}
-      
-      style={{ width: "60%" ,height:"200px" , marginBottom:"5%" }}
-    />
-          <Button variant="contained" sx={{width:"60%" ,height:"45px"}} onClick={()=>{
-              postData()
-          }} >Submit</Button>
-         </Box>
-      </Box>
-      <Box
-        sx={{
-          width: "60%",
-          height: "400px",
-          margin: "auto",
-          boxShadow:
-            " rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px",
-          padding: "20px",
-          textAlign: "center",
-          backgroundColor:"InfoBackground",
-          overflow: "auto"
-        }}
-      >
-        <Typography
-          variant="h5"
-          sx={{ fontFamily: "monospace", fontSize: "25px"  , marginBottom:"5%" }}
-        >
-          All Notices
-        </Typography>
-      {
-        noticeData.map((e)=>{
-          return (
-            <>
-               <SingleNoticeItem text={e.noticeText} username={e.user_id.username} date={new Date(e.createdAt).toLocaleDateString()}  time={new Date(e.createdAt).toLocaleTimeString()}/>
-            </>
-          )
-        })
-      }
-        
-      </Box>
-   </Box>
-   
-   </>
-  )
+  return user._id?(
+    <>
+  <AppBar>
+ 
+     <Toolbar>
+         <Typography>Welcome {user.username}</Typography>
+     </Toolbar>
+  </AppBar>
+    
+    <Box sx={{width:"100%" , marginTop:"100px" , display:"flex", justifyContent:"space-around"}}>
+    <Box
+         sx={{
+           width: "40%",
+           height: "400px",
+           margin: "auto",
+           boxShadow:
+             " rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px",
+           padding: "20px",
+           textAlign: "center",
+           backgroundColor:"InfoBackground",
+           
+           
+         }}
+       >
+         <Typography
+           variant="h5"
+           sx={{ fontFamily: "monospace", fontSize: "25px"  , marginBottom:"5%"}}
+         >
+           Write Notice in the box
+         </Typography>
+          <Box sx={{display:"flex",flexDirection:"column" ,width:"100%" ,alignItems:"center"}}>
+          <TextareaAutosize
+       aria-label="maximum height"
+       placeholder="write notice text here within 100 characters ..."
+       onChange={(e)=>{
+          setText({...text,noticeText:e.target.value , user_id:user._id})
+       }}
+       maxLength={100}
+       
+       style={{ width: "60%" ,height:"200px" , marginBottom:"5%" }}
+     />
+           <Button variant="contained" sx={{width:"60%" ,height:"45px"}} onClick={()=>{
+               postData()
+           }} >Submit</Button>
+          </Box>
+       </Box>
+       <Box
+         sx={{
+           width: "60%",
+           height: "400px",
+           margin: "auto",
+           boxShadow:
+             " rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px",
+           padding: "20px",
+           textAlign: "center",
+           backgroundColor:"InfoBackground",
+           overflow: "auto"
+         }}
+       >
+         <Typography
+           variant="h5"
+           sx={{ fontFamily: "monospace", fontSize: "25px"  , marginBottom:"5%" }}
+         >
+           All Notices
+         </Typography>
+       {
+         noticeData.map((e)=>{
+           return (
+             <>
+                <SingleNoticeItem text={e.noticeText} username={e.user_id.username} date={new Date(e.createdAt).toLocaleDateString()}  time={new Date(e.createdAt).toLocaleTimeString()}/>
+             </>
+           )
+         })
+       }
+         
+       </Box>
+    </Box>
+    
+    </>
+   ):<Login/>
 }
