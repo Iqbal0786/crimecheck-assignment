@@ -11,7 +11,8 @@ export default function Register() {
   const [input,setInput]=useState({
     username:""
 })
-const userpattern = /[a-zA-Z0-9]/;
+const userpattern = /[@#$%_ ]/;
+
   return (
     <>
       <Box
@@ -39,14 +40,14 @@ const userpattern = /[a-zA-Z0-9]/;
          }}/>
           <Button variant="contained" sx={{width:"60%" ,height:"45px"}}
           onClick={()=>{
-        //     if(!userpattern.test(input.username)){
-        //       alert("username must contains alphanumeric character!!")
+            if(userpattern.test(input.username)){
+              alert("username must contains alphanumeric character!!")
                
-        //     }
-        //     else{
-             
-        //   }
-        dispatch(RegisterHandler(input ,navigate))}
+            }
+            else{
+                dispatch(RegisterHandler(input ,navigate))}
+          }
+       
         }
           >Submit</Button>
          </Box>
