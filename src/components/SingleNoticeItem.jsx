@@ -4,9 +4,10 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Box } from '@mui/system';
+import { Box } from '@mui/system'
 
 export default function SingleNoticeItem({text,username , date ,time}) {
+
   return (
     <div>
       <Accordion   sx={{marginBottom:"10px"}}>

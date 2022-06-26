@@ -3,13 +3,15 @@ import React, { useEffect, useState } from 'react'
 import {  Button,  TextField } from "@mui/material";
 import axios from 'axios';
 import SingleNoticeItem from './SingleNoticeItem';
-
+ import { useSelector } from 'react-redux';
 export default function NoticePage() {
    const [noticeData,setNoticeData]=useState([]);
    const [text,setText]=useState({
     noticeText:"",
     user_id:""
    })
+   const {user}= useSelector((store)=>store.logInData)
+   console.log(user._id)
 
     useEffect(()=>{
       fetchRecord()
@@ -22,13 +24,23 @@ export default function NoticePage() {
         console.log(err.message)
       })
    }
+
+   const postData=()=>{
+      axios.post("http://localhost:1212/noticeBoards",text).then((res)=>{
+        alert("Notice submitted successfully !!")
+        fetchRecord()
+        setText({...text,noticeText:""})
+      }).catch((err)=>{
+        alert("Something went wrong ??")
+      })
+   }
    console.log(text)
   return (
    <>
  <AppBar>
 
     <Toolbar>
-        <Typography>Welcome Iqbal@123</Typography>
+        <Typography>Welcome {user.username}</Typography>
     </Toolbar>
  </AppBar>
    
@@ -42,7 +54,8 @@ export default function NoticePage() {
             " rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px",
           padding: "20px",
           textAlign: "center",
-          backgroundColor:"InfoBackground"
+          backgroundColor:"InfoBackground",
+          
           
         }}
       >
@@ -57,13 +70,15 @@ export default function NoticePage() {
       aria-label="maximum height"
       placeholder="write notice text here within 100 characters ..."
       onChange={(e)=>{
-         setText({...text,noticeText:e.target.value})
+         setText({...text,noticeText:e.target.value , user_id:user._id})
       }}
       maxLength={100}
       
       style={{ width: "60%" ,height:"200px" , marginBottom:"5%" }}
     />
-          <Button variant="contained" sx={{width:"60%" ,height:"45px"}} >Submit</Button>
+          <Button variant="contained" sx={{width:"60%" ,height:"45px"}} onClick={()=>{
+              postData()
+          }} >Submit</Button>
          </Box>
       </Box>
       <Box
@@ -75,12 +90,13 @@ export default function NoticePage() {
             " rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px",
           padding: "20px",
           textAlign: "center",
-          backgroundColor:"InfoBackground"
+          backgroundColor:"InfoBackground",
+          overflow: "auto"
         }}
       >
         <Typography
           variant="h5"
-          sx={{ fontFamily: "monospace", fontSize: "25px"  , marginBottom:"5%"}}
+          sx={{ fontFamily: "monospace", fontSize: "25px"  , marginBottom:"5%" }}
         >
           All Notices
         </Typography>
